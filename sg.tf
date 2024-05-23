@@ -33,7 +33,7 @@ resource "aws_security_group" "alb_private" {
   vpc_id                    = data.terraform_remote_state.vpc.outputs.VPC_ID
 
   ingress {
-    description              = "Allows External HTTP traffic"
+    description              = "Allows Internal traffic"
     from_port                = 80
     to_port                  = 90
     protocol                 = "tcp"
