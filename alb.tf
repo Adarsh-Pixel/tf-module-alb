@@ -11,3 +11,18 @@ resource "aws_lb" "alb" {
     NAME = var.ALB_NAME
   }
 }
+
+# Creates listerner for the PRIVATE ALB
+
+# This creates the listernr and adds to the PRIVATE ALB
+resource "aws_lb_listener" "private" {
+  count             = var.INTERNAL ? 1 : 0 
+  load_balancer_arn = aws_lb.alb.arn
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "fixed-response"
+    target_group_arn = aws_lb_target_group.app.arn
+  }
+}
