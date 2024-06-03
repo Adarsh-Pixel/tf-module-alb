@@ -23,6 +23,11 @@ resource "aws_lb_listener" "private" {
 
   default_action {
     type             = "fixed-response"
-    target_group_arn = aws_lb_target_group.app.arn
+
+    fixed_response {
+      content_type = "text/plain"
+      message_body = "fixed response content"
+      status_code  = "200"
+    }
   }
 }
